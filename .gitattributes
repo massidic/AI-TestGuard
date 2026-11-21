@@ -1,0 +1,4 @@
+# Empêche Git (autocrlf sous Windows) de modifier les fins de ligne :
+# l'empreinte SHA-256 de l'échantillon est vérifiée par les tests de non-régression.
+*.csv -text
+*.json text eol=lf

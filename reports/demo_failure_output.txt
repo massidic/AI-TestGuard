@@ -1,0 +1,9 @@
+>       assert recall_observed >= recall_required, "Échec volontaire : rappel sous le seuil d'acceptation"
+E       AssertionError: Échec volontaire : rappel sous le seuil d'acceptation
+E       assert 0.6 >= 0.75
+
+tests/test_ci_failure_demo.py:15: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_ci_failure_demo.py::test_intentional_failure - AssertionErr...
+1 failed in 0.14s
+exit code: 1

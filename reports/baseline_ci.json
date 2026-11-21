@@ -1,0 +1,32 @@
+{
+  "created_by": "scripts.run_pipeline --write-baseline",
+  "environment": {
+    "app_version": "1.0.0",
+    "python": "3.13.18",
+    "scikit-learn": "1.9.1",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "joblib": "1.6.0"
+  },
+  "random_state": 42,
+  "model_name": "logreg",
+  "params": {
+    "C": 1.0
+  },
+  "threshold": 0.9999997126403735,
+  "dataset": {
+    "file": "sample_creditcard.csv",
+    "sha256": "3f5d24775896a976eac8534e86db2ae94c7a38a622b4b2c865fab9082a2a681a",
+    "n": 5000,
+    "n_fraud": 150,
+    "duplicates_removed": 0
+  },
+  "valid_metrics": {
+    "pr_auc": 0.9248737666118327,
+    "roc_auc": 0.9800343642611684,
+    "recall": 0.8666666666666667,
+    "precision": 1.0,
+    "f1": 0.9285714285714286,
+    "fpr": 0.0
+  }
+}

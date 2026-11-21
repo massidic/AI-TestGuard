@@ -1,0 +1,56 @@
+{
+  "protocol": {
+    "warmup": 50,
+    "n_single": 1000,
+    "batch_size": 10000,
+    "n_batch": 10,
+    "timer": "time.perf_counter"
+  },
+  "hardware": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 158 Stepping 9, GenuineIntel",
+    "cpu_count": 8,
+    "ram_gb": 34.2,
+    "python": "3.14.8"
+  },
+  "single_prediction": {
+    "mean_ms": 2.9232718007988296,
+    "p50_ms": 2.8289000038057566,
+    "p95_ms": 3.384890040615573,
+    "p99_ms": 3.8521309942007065,
+    "max_ms": 5.58559998171404
+  },
+  "api_like_request": {
+    "mean_ms": 5.031529700441752,
+    "p50_ms": 4.90259999060072,
+    "p95_ms": 5.750215012812987,
+    "p99_ms": 6.208756010164507,
+    "max_ms": 7.747800031211227
+  },
+  "batch": {
+    "median_s": 0.009931249980581924,
+    "throughput_tx_per_s": 1006922.5947944619
+  },
+  "model_size_mb": 0.003769,
+  "memory": {
+    "rss_start_mb": 160.186368,
+    "rss_after_load_mb": 160.423936,
+    "rss_end_mb": 240.205824,
+    "increase_mb": 80.019456,
+    "tracemalloc_peak_batch_mb": 7.476292
+  },
+  "criteria": {
+    "single_p95_ms_max": 50.0,
+    "api_p95_ms_max": 100.0,
+    "batch_throughput_min": 5000.0,
+    "model_size_mb_max": 50.0,
+    "memory_increase_mb_max": 500.0
+  },
+  "checks": {
+    "single_p95": true,
+    "api_p95": true,
+    "throughput": true,
+    "model_size": true,
+    "memory": true
+  }
+}

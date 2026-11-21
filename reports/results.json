@@ -1,0 +1,720 @@
+{
+  "environment": {
+    "app_version": "1.0.0",
+    "python": "3.14.8",
+    "scikit-learn": "1.9.1",
+    "numpy": "2.5.5",
+    "pandas": "3.1.1",
+    "joblib": "1.6.0"
+  },
+  "random_state": 42,
+  "acceptance_criteria": {
+    "recall_min": 0.75,
+    "precision_min": 0.5,
+    "fpr_max": 0.001,
+    "pr_auc_min": 0.7,
+    "roc_auc_min": 0.95
+  },
+  "threshold_recall_target": 0.8,
+  "dataset": {
+    "file": "creditcard.csv",
+    "sha256": "76274b691b16a6c49d3f159c883398e03ccd6d1ee12d9d8ee38f4b4b98551a89",
+    "n_raw": 284807,
+    "n_fraud_raw": 492,
+    "duplicates_removed": 1081,
+    "n": 283726,
+    "n_fraud": 473,
+    "fraud_rate": 0.001667101358352777,
+    "time_span_hours": 47.99777777777778,
+    "amount_stats": {
+      "count": 283726.0,
+      "mean": 88.47268731099723,
+      "std": 250.39943711577337,
+      "min": 0.0,
+      "25%": 5.6,
+      "50%": 22.0,
+      "75%": 77.51,
+      "max": 25691.16
+    }
+  },
+  "splits": {
+    "train": {
+      "n": 170235,
+      "n_fraud": 284,
+      "fraud_rate": 0.0016682820806532147
+    },
+    "valid": {
+      "n": 56745,
+      "n_fraud": 94,
+      "fraud_rate": 0.0016565336152965019
+    },
+    "test": {
+      "n": 56746,
+      "n_fraud": 95,
+      "fraud_rate": 0.0016741268107003137
+    }
+  },
+  "dummy_test": {
+    "n": 56746,
+    "n_fraud": 95,
+    "tp": 0,
+    "tn": 56651,
+    "fp": 0,
+    "fn": 95,
+    "accuracy": 0.9983258731892997,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "fpr": 0.0,
+    "fnr": 1.0,
+    "alert_rate": 0.0,
+    "cost": 2375.0,
+    "roc_auc": 0.5,
+    "pr_auc": 0.0016741268107003137
+  },
+  "models": {
+    "logreg": {
+      "model": "logreg",
+      "label": "R\u00e9gression logistique",
+      "best_params": {
+        "C": 0.01
+      },
+      "grid": [
+        {
+          "params": {
+            "C": 0.01
+          },
+          "valid_pr_auc": 0.7922430313892823
+        },
+        {
+          "params": {
+            "C": 0.1
+          },
+          "valid_pr_auc": 0.790228843481355
+        },
+        {
+          "params": {
+            "C": 1.0
+          },
+          "valid_pr_auc": 0.7894904499749902
+        }
+      ],
+      "grid_search_seconds": 1.8527294000377879,
+      "threshold": {
+        "threshold": 0.999988335782412,
+        "valid_precision": 0.875,
+        "valid_recall": 0.8191489361702128,
+        "strategy": "max_precision_sous_contrainte_rappel"
+      },
+      "train": {
+        "n": 170235,
+        "n_fraud": 284,
+        "tp": 213,
+        "tn": 169913,
+        "fp": 38,
+        "fn": 71,
+        "accuracy": 0.9993597086380591,
+        "precision": 0.848605577689243,
+        "recall": 0.75,
+        "f1": 0.7962616822429905,
+        "fpr": 0.00022359385940653483,
+        "fnr": 0.25,
+        "alert_rate": 0.0014744324022674539,
+        "cost": 1813.0,
+        "roc_auc": 0.9908507597177346,
+        "pr_auc": 0.7259573723183275
+      },
+      "valid": {
+        "n": 56745,
+        "n_fraud": 94,
+        "tp": 77,
+        "tn": 56640,
+        "fp": 11,
+        "fn": 17,
+        "accuracy": 0.9995065644550181,
+        "precision": 0.875,
+        "recall": 0.8191489361702128,
+        "f1": 0.8461538461538463,
+        "fpr": 0.0001941713297205698,
+        "fnr": 0.18085106382978725,
+        "alert_rate": 0.0015507974270860868,
+        "cost": 436.0,
+        "roc_auc": 0.9812247215782185,
+        "pr_auc": 0.7922430313892823
+      },
+      "test": {
+        "n": 56746,
+        "n_fraud": 95,
+        "tp": 70,
+        "tn": 56639,
+        "fp": 12,
+        "fn": 25,
+        "accuracy": 0.9993479716632009,
+        "precision": 0.8536585365853658,
+        "recall": 0.7368421052631579,
+        "f1": 0.7909604519774011,
+        "fpr": 0.00021182326878607614,
+        "fnr": 0.2631578947368421,
+        "alert_rate": 0.0014450357734465866,
+        "cost": 637.0,
+        "roc_auc": 0.9621202394346177,
+        "pr_auc": 0.6783153777809765
+      },
+      "test_at_0.5": {
+        "n": 56746,
+        "n_fraud": 95,
+        "tp": 83,
+        "tn": 55097,
+        "fp": 1554,
+        "fn": 12,
+        "accuracy": 0.9724033412046664,
+        "precision": 0.05070250458155162,
+        "recall": 0.8736842105263158,
+        "f1": 0.09584295612009239,
+        "fpr": 0.02743111330779686,
+        "fnr": 0.12631578947368421,
+        "alert_rate": 0.028847848306488563,
+        "cost": 1854.0,
+        "roc_auc": 0.9621202394346177,
+        "pr_auc": 0.6783153777809765
+      },
+      "test_ci95": {
+        "precision": [
+          0.7727128883774453,
+          0.9253869541182974
+        ],
+        "recall": [
+          0.648921557166238,
+          0.8210742609949531
+        ],
+        "f1": [
+          0.7218934911242604,
+          0.851882569773565
+        ],
+        "fpr": [
+          0.00010590219403192143,
+          0.0003353752982073696
+        ],
+        "pr_auc": [
+          0.5750940759445236,
+          0.787349652531553
+        ]
+      }
+    },
+    "tree": {
+      "model": "tree",
+      "label": "Arbre de d\u00e9cision",
+      "best_params": {
+        "max_depth": 8,
+        "min_samples_leaf": 20
+      },
+      "grid": [
+        {
+          "params": {
+            "max_depth": 4,
+            "min_samples_leaf": 1
+          },
+          "valid_pr_auc": 0.09233945781512931
+        },
+        {
+          "params": {
+            "max_depth": 4,
+            "min_samples_leaf": 20
+          },
+          "valid_pr_auc": 0.09233945781512931
+        },
+        {
+          "params": {
+            "max_depth": 6,
+            "min_samples_leaf": 1
+          },
+          "valid_pr_auc": 0.45863758116872544
+        },
+        {
+          "params": {
+            "max_depth": 6,
+            "min_samples_leaf": 20
+          },
+          "valid_pr_auc": 0.46337486350959495
+        },
+        {
+          "params": {
+            "max_depth": 8,
+            "min_samples_leaf": 1
+          },
+          "valid_pr_auc": 0.45466573984904024
+        },
+        {
+          "params": {
+            "max_depth": 8,
+            "min_samples_leaf": 20
+          },
+          "valid_pr_auc": 0.694859064410243
+        }
+      ],
+      "grid_search_seconds": 22.802503299957607,
+      "threshold": {
+        "threshold": 0.9484520493666858,
+        "valid_precision": 0.1413237924865832,
+        "valid_recall": 0.8404255319148937,
+        "strategy": "max_precision_sous_contrainte_rappel"
+      },
+      "train": {
+        "n": 170235,
+        "n_fraud": 284,
+        "tp": 283,
+        "tn": 168488,
+        "fp": 1463,
+        "fn": 1,
+        "accuracy": 0.9914001233588863,
+        "precision": 0.1620847651775487,
+        "recall": 0.9964788732394366,
+        "f1": 0.2788177339901478,
+        "fpr": 0.00860836358715159,
+        "fnr": 0.0035211267605633804,
+        "alert_rate": 0.010256410256410256,
+        "cost": 1488.0,
+        "roc_auc": 0.9991622170963776,
+        "pr_auc": 0.7579336870088844
+      },
+      "valid": {
+        "n": 56745,
+        "n_fraud": 94,
+        "tp": 79,
+        "tn": 56171,
+        "fp": 480,
+        "fn": 15,
+        "accuracy": 0.9912767644726408,
+        "precision": 0.1413237924865832,
+        "recall": 0.8404255319148937,
+        "f1": 0.2419601837672282,
+        "fpr": 0.008472930751443047,
+        "fnr": 0.1595744680851064,
+        "alert_rate": 0.009851088201603665,
+        "cost": 855.0,
+        "roc_auc": 0.918918446914798,
+        "pr_auc": 0.694859064410243
+      },
+      "test": {
+        "n": 56746,
+        "n_fraud": 95,
+        "tp": 76,
+        "tn": 56174,
+        "fp": 477,
+        "fn": 19,
+        "accuracy": 0.9912592958093963,
+        "precision": 0.13743218806509946,
+        "recall": 0.8,
+        "f1": 0.23456790123456792,
+        "fpr": 0.008419974934246528,
+        "fnr": 0.2,
+        "alert_rate": 0.00974518027702393,
+        "cost": 952.0,
+        "roc_auc": 0.8984691123583084,
+        "pr_auc": 0.6357661618960526
+      },
+      "test_at_0.5": {
+        "n": 56746,
+        "n_fraud": 95,
+        "tp": 76,
+        "tn": 56042,
+        "fp": 609,
+        "fn": 19,
+        "accuracy": 0.9889331406618969,
+        "precision": 0.11094890510948906,
+        "recall": 0.8,
+        "f1": 0.19487179487179487,
+        "fpr": 0.010750030890893365,
+        "fnr": 0.2,
+        "alert_rate": 0.012071335424523315,
+        "cost": 1084.0,
+        "roc_auc": 0.8984691123583084,
+        "pr_auc": 0.6357661618960526
+      },
+      "test_ci95": {
+        "precision": [
+          0.10999542429284526,
+          0.16441858052276248
+        ],
+        "recall": [
+          0.7204193548387097,
+          0.875
+        ],
+        "f1": [
+          0.1919516621729616,
+          0.2748538011695907
+        ],
+        "fpr": [
+          0.007660667722567258,
+          0.009179753402149063
+        ],
+        "pr_auc": [
+          0.5282881503105664,
+          0.7263437610859889
+        ]
+      }
+    }
+  },
+  "champion": "logreg",
+  "reload_check": {
+    "max_abs_diff": 0.0,
+    "identical_classes": true,
+    "model_size_bytes": 3769
+  },
+  "acceptance": {
+    "recall": {
+      "value": 0.7368421052631579,
+      "rule": ">= 0.75",
+      "passed": false
+    },
+    "precision": {
+      "value": 0.8536585365853658,
+      "rule": ">= 0.5",
+      "passed": true
+    },
+    "fpr": {
+      "value": 0.00021182326878607614,
+      "rule": "<= 0.001",
+      "passed": true
+    },
+    "pr_auc": {
+      "value": 0.6783153777809765,
+      "rule": ">= 0.7",
+      "passed": false
+    },
+    "roc_auc": {
+      "value": 0.9621202394346177,
+      "rule": ">= 0.95",
+      "passed": true
+    },
+    "all_passed": false
+  },
+  "error_analysis": {
+    "TP": {
+      "n": 70,
+      "proba_median": 0.9999999999933152,
+      "proba_q90": 1.0,
+      "amount_median": 34.295,
+      "amount_mean": 153.05857142857144,
+      "amount_sum": 10714.1,
+      "night_share_0_6h": 0.32857142857142857
+    },
+    "FN": {
+      "n": 25,
+      "proba_median": 0.6652499179113274,
+      "proba_q90": 0.9997817256022321,
+      "amount_median": 2.22,
+      "amount_mean": 162.0884,
+      "amount_sum": 4052.21,
+      "night_share_0_6h": 0.16
+    },
+    "FP": {
+      "n": 12,
+      "proba_median": 0.9999999999999096,
+      "proba_q90": 1.0,
+      "amount_median": 89.99,
+      "amount_mean": 2389.9258333333337,
+      "amount_sum": 28679.110000000004,
+      "night_share_0_6h": 0.25
+    },
+    "TN": {
+      "n": 56639,
+      "proba_median": 0.023838393849526317,
+      "proba_q90": 0.18234795764559172,
+      "amount_median": 21.58,
+      "amount_mean": 88.21566023411431,
+      "amount_sum": 4996446.78,
+      "night_share_0_6h": 0.08584191105068946
+    },
+    "FN_far_from_threshold": 7,
+    "FN_close_to_threshold": 13,
+    "FP_very_confident": 12
+  },
+  "robustness": [
+    {
+      "id": "R1",
+      "scenario": "Valeurs manquantes (V14, Amount) sur 5 % des lignes",
+      "amplitude": "5 % des lignes",
+      "expected": "Rejeter (ou marquer invalide)",
+      "observed": "Rejet strict OK ; mode flag : 2863 lignes marqu\u00e9es invalides",
+      "n": 56746,
+      "n_invalid": 2863,
+      "mean_abs_dproba": 5.325132322778775e-21,
+      "p99_abs_dproba": 0.0,
+      "max_abs_dproba": 8.326672684688674e-17,
+      "flip_rate": 0.0,
+      "n_flips": 0,
+      "n_flips_fraud": 0,
+      "recall_before": 0.7368421052631579,
+      "recall_after": 0.7282608695652174,
+      "precision_before": 0.8536585365853658,
+      "precision_after": 0.8481012658227848,
+      "fpr_before": 0.00021182326878607614,
+      "fpr_after": 0.0002230856462977078
+    },
+    {
+      "id": "R2",
+      "scenario": "Valeurs infinies (V1) / non num\u00e9riques (Amount)",
+      "amplitude": "10 lignes \u00b1inf ; 5 lignes texte",
+      "expected": "Rejeter",
+      "observed": "Rejet OK ; texte 'abc' dans Amount : rejet OK",
+      "n": 56746,
+      "n_invalid": 10,
+      "mean_abs_dproba": 1.6233603805809997e-21,
+      "p99_abs_dproba": 0.0,
+      "max_abs_dproba": 4.163336342344337e-17,
+      "flip_rate": 0.0,
+      "n_flips": 0,
+      "n_flips_fraud": 0,
+      "recall_before": 0.7368421052631579,
+      "recall_after": 0.7368421052631579,
+      "precision_before": 0.8536585365853658,
+      "precision_after": 0.8536585365853658,
+      "fpr_before": 0.00021182326878607614,
+      "fpr_after": 0.00021186066630179552
+    },
+    {
+      "id": "R3",
+      "scenario": "Amount extr\u00eame (10 \u00d7 max entra\u00eenement)",
+      "amplitude": "196,565",
+      "expected": "Traiter + alerte",
+      "observed": "Trait\u00e9 ; 56746 alertes 'extreme_amount' ; proba finies=True",
+      "n": 56746,
+      "n_invalid": 0,
+      "mean_abs_dproba": 0.04575263347141071,
+      "p99_abs_dproba": 0.21256428113359732,
+      "max_abs_dproba": 0.2538348336738741,
+      "flip_rate": 5.28671624431678e-05,
+      "n_flips": 3,
+      "n_flips_fraud": 2,
+      "recall_before": 0.7368421052631579,
+      "recall_after": 0.7578947368421053,
+      "precision_before": 0.8536585365853658,
+      "precision_after": 0.8470588235294118,
+      "fpr_before": 0.00021182326878607614,
+      "fpr_after": 0.0002294752078515825
+    },
+    {
+      "id": "R4-V1",
+      "scenario": "Bruit gaussien V1..V28",
+      "amplitude": "\u03c3 = 1% \u00d7 \u00e9cart-type train",
+      "expected": "Traiter ; mesurer la sensibilit\u00e9",
+      "observed": "",
+      "n": 56746,
+      "n_invalid": 0,
+      "mean_abs_dproba": 0.0010424129594661209,
+      "p99_abs_dproba": 0.009003536491429692,
+      "max_abs_dproba": 0.02624406505428245,
+      "flip_rate": 0.0,
+      "n_flips": 0,
+      "n_flips_fraud": 0,
+      "recall_before": 0.7368421052631579,
+      "recall_after": 0.7368421052631579,
+      "precision_before": 0.8536585365853658,
+      "precision_after": 0.8536585365853658,
+      "fpr_before": 0.00021182326878607614,
+      "fpr_after": 0.00021182326878607614
+    },
+    {
+      "id": "R4-V5",
+      "scenario": "Bruit gaussien V1..V28",
+      "amplitude": "\u03c3 = 5% \u00d7 \u00e9cart-type train",
+      "expected": "Traiter ; mesurer la sensibilit\u00e9",
+      "observed": "",
+      "n": 56746,
+      "n_invalid": 0,
+      "mean_abs_dproba": 0.005220359791264971,
+      "p99_abs_dproba": 0.04516575705538844,
+      "max_abs_dproba": 0.13038089992996887,
+      "flip_rate": 0.0,
+      "n_flips": 0,
+      "n_flips_fraud": 0,
+      "recall_before": 0.7368421052631579,
+      "recall_after": 0.7368421052631579,
+      "precision_before": 0.8536585365853658,
+      "precision_after": 0.8536585365853658,
+      "fpr_before": 0.00021182326878607614,
+      "fpr_after": 0.00021182326878607614
+    },
+    {
+      "id": "R4-V10",
+      "scenario": "Bruit gaussien V1..V28",
+      "amplitude": "\u03c3 = 10% \u00d7 \u00e9cart-type train",
+      "expected": "Traiter ; mesurer la sensibilit\u00e9",
+      "observed": "",
+      "n": 56746,
+      "n_invalid": 0,
+      "mean_abs_dproba": 0.010491419570379742,
+      "p99_abs_dproba": 0.09182536319014961,
+      "max_abs_dproba": 0.24882513046057325,
+      "flip_rate": 0.0,
+      "n_flips": 0,
+      "n_flips_fraud": 0,
+      "recall_before": 0.7368421052631579,
+      "recall_after": 0.7368421052631579,
+      "precision_before": 0.8536585365853658,
+      "precision_after": 0.8536585365853658,
+      "fpr_before": 0.00021182326878607614,
+      "fpr_after": 0.00021182326878607614
+    },
+    {
+      "id": "R4-A5",
+      "scenario": "Variation multiplicative Amount",
+      "amplitude": "\u00b15 %, arrondi au centime",
+      "expected": "Traiter ; mesurer la sensibilit\u00e9",
+      "observed": "",
+      "n": 56746,
+      "n_invalid": 0,
+      "mean_abs_dproba": 8.963148483676161e-05,
+      "p99_abs_dproba": 0.0007278133239930163,
+      "max_abs_dproba": 0.0010813122428908195,
+      "flip_rate": 0.0,
+      "n_flips": 0,
+      "n_flips_fraud": 0,
+      "recall_before": 0.7368421052631579,
+      "recall_after": 0.7368421052631579,
+      "precision_before": 0.8536585365853658,
+      "precision_after": 0.8536585365853658,
+      "fpr_before": 0.00021182326878607614,
+      "fpr_after": 0.00021182326878607614
+    },
+    {
+      "id": "R4-T60",
+      "scenario": "D\u00e9calage Time",
+      "amplitude": "+60 s",
+      "expected": "Traiter ; mesurer la sensibilit\u00e9",
+      "observed": "",
+      "n": 56746,
+      "n_invalid": 0,
+      "mean_abs_dproba": 4.751831752315946e-05,
+      "p99_abs_dproba": 0.0003282466198359702,
+      "max_abs_dproba": 0.0003792109436340785,
+      "flip_rate": 0.0,
+      "n_flips": 0,
+      "n_flips_fraud": 0,
+      "recall_before": 0.7368421052631579,
+      "recall_after": 0.7368421052631579,
+      "precision_before": 0.8536585365853658,
+      "precision_after": 0.8536585365853658,
+      "fpr_before": 0.00021182326878607614,
+      "fpr_after": 0.00021182326878607614
+    },
+    {
+      "id": "R5-A",
+      "scenario": "D\u00e9rive : montants \u00d7 1,5 (inflation / devise)",
+      "amplitude": "\u00d7 1,5",
+      "expected": "Traiter + alerte de d\u00e9rive (PSI)",
+      "observed": "PSI Amount = 0.150 (SURVEILLER)",
+      "n": 56746,
+      "n_invalid": 0,
+      "mean_abs_dproba": 0.0014943449553658607,
+      "p99_abs_dproba": 0.008260986772275195,
+      "max_abs_dproba": 0.00863023327952378,
+      "flip_rate": 1.7622387481055934e-05,
+      "n_flips": 1,
+      "n_flips_fraud": 1,
+      "recall_before": 0.7368421052631579,
+      "recall_after": 0.7473684210526316,
+      "precision_before": 0.8536585365853658,
+      "precision_after": 0.8554216867469879,
+      "fpr_before": 0.00021182326878607614,
+      "fpr_after": 0.00021182326878607614
+    },
+    {
+      "id": "R5-B",
+      "scenario": "D\u00e9rive : d\u00e9calage moyen +0,5\u03c3 sur V1..V5",
+      "amplitude": "+0,5 \u03c3",
+      "expected": "Traiter + alerte de d\u00e9rive (PSI)",
+      "observed": "PSI max = 1.095 (ALERTE)",
+      "n": 56746,
+      "n_invalid": 0,
+      "mean_abs_dproba": 0.04914092342717172,
+      "p99_abs_dproba": 0.19777497378129336,
+      "max_abs_dproba": 0.19869110532470408,
+      "flip_rate": 7.048954992422373e-05,
+      "n_flips": 4,
+      "n_flips_fraud": 2,
+      "recall_before": 0.7368421052631579,
+      "recall_after": 0.7578947368421053,
+      "precision_before": 0.8536585365853658,
+      "precision_after": 0.8372093023255814,
+      "fpr_before": 0.00021182326878607614,
+      "fpr_after": 0.0002471271469170888
+    },
+    {
+      "id": "R6",
+      "scenario": "Sch\u00e9ma invalide",
+      "amplitude": "\u2014",
+      "expected": "Rejeter (manquant/doublon), ignorer (suppl\u00e9mentaire)",
+      "observed": "colonne V3 absente : rejet OK ; colonne en double : rejet OK ; colonne suppl\u00e9mentaire : ignor\u00e9e (5 pr\u00e9dictions)"
+    }
+  ],
+  "temporal_holdout": {
+    "threshold": 0.9641487925992723,
+    "test": {
+      "n": 56746,
+      "n_fraud": 74,
+      "tp": 62,
+      "tn": 56549,
+      "fp": 123,
+      "fn": 12,
+      "accuracy": 0.9976209776900574,
+      "precision": 0.33513513513513515,
+      "recall": 0.8378378378378378,
+      "f1": 0.47876447876447875,
+      "fpr": 0.0021703839638622245,
+      "fnr": 0.16216216216216217,
+      "alert_rate": 0.0032601416839953476,
+      "cost": 423.0,
+      "roc_auc": 0.9813333148930975,
+      "pr_auc": 0.7312510185676633
+    },
+    "periods_hours": [
+      33.44222222222222,
+      40.3425,
+      47.99777777777778
+    ]
+  },
+  "monitoring": {
+    "drift_day1_vs_day2_top5": [
+      {
+        "feature": "V1",
+        "psi": 1.5678342845662232,
+        "status": "ALERTE"
+      },
+      {
+        "feature": "V3",
+        "psi": 1.426312288100328,
+        "status": "ALERTE"
+      },
+      {
+        "feature": "V28",
+        "psi": 1.051258555235973,
+        "status": "ALERTE"
+      },
+      {
+        "feature": "V25",
+        "psi": 0.4397417831428118,
+        "status": "ALERTE"
+      },
+      {
+        "feature": "V15",
+        "psi": 0.4013074911154632,
+        "status": "ALERTE"
+      }
+    ],
+    "n_features_alert": 8,
+    "n_features_warning": 7,
+    "alert_rate_day2": {
+      "observed_rate": 0.0012402322747150332,
+      "expected_rate": 0.0015507974270860868,
+      "band": [
+        0.0007753987135430434,
+        0.0031015948541721736
+      ],
+      "status": "OK"
+    },
+    "fraud_rate_day1": 0.0018857982750492249,
+    "fraud_rate_day2": 0.0014409635099290271
+  }
+}

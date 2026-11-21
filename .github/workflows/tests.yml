@@ -1,0 +1,100 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      demo_failure:
+        description: "Déclencher un échec volontaire (preuve de détection)"
+        type: boolean
+        default: false
+      full_evaluation:
+        description: "Lancer l'évaluation complète sur le jeu Kaggle"
+        type: boolean
+        default: false
+  schedule:
+    - cron: "17 3 * * 1" # évaluation complète chaque lundi à 03:17 UTC
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Style (Ruff)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install ruff
+      - run: ruff check .
+      - run: ruff format --check .
+
+  tests:
+    name: Pytest (Python ${{ matrix.python-version }})
+    needs: lint
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.12"]
+    env:
+      DEMO_FAILURE: ${{ github.event.inputs.demo_failure == 'true' && '1' || '0' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Tests rapides + couverture (échec si couverture < 85 %)
+        run: >
+          pytest -m "not slow"
+          --cov=app --cov-report=term-missing --cov-report=xml
+          --junitxml=reports/junit.xml
+      - name: Publier les rapports de test
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports-py${{ matrix.python-version }}
+          path: |
+            coverage.xml
+            reports/junit.xml
+
+  full-evaluation:
+    name: Évaluation complète (manuelle / planifiée)
+    needs: tests
+    if: github.event_name == 'schedule' || github.event.inputs.full_evaluation == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt kaggle
+      - name: Télécharger le jeu Kaggle (secrets KAGGLE_USERNAME / KAGGLE_KEY)
+        env:
+          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+        run: |
+          kaggle datasets download -d mlg-ulb/creditcardfraud -p data --unzip
+      - run: pytest -m slow
+      - run: python -m scripts.run_pipeline
+      - run: python -m scripts.benchmark
+      - name: Non-régression vs référence figée
+        run: python -m scripts.compare_to_baseline --name ci-candidate --params '{"C": 0.01}'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qualification-reports
+          path: reports/

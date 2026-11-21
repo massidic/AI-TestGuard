@@ -1,0 +1,61 @@
+{
+  "candidate": {
+    "name": "v1.2-C1",
+    "model": "logreg",
+    "params": {
+      "C": 1.0
+    },
+    "threshold": 0.999999989015571,
+    "environment": {
+      "app_version": "1.0.0",
+      "python": "3.14.8",
+      "scikit-learn": "1.9.1",
+      "numpy": "2.5.5",
+      "pandas": "3.1.1",
+      "joblib": "1.6.0"
+    },
+    "valid_metrics": {
+      "pr_auc": 0.7894904499749902,
+      "roc_auc": 0.9819332403664544,
+      "recall": 0.8085106382978723,
+      "precision": 0.8837209302325582,
+      "f1": 0.8444444444444444,
+      "fpr": 0.00017651939065506346
+    }
+  },
+  "baseline": {
+    "model": "logreg",
+    "params": {
+      "C": 0.01
+    },
+    "threshold": 0.9999883357822414
+  },
+  "decision": "INVESTIGUER",
+  "same_dataset": false,
+  "details": {
+    "pr_auc": {
+      "baseline": 0.7922430313892823,
+      "candidate": 0.7894904499749902,
+      "delta": -0.0027525814142921323,
+      "status": "ACCEPTER"
+    },
+    "roc_auc": {
+      "baseline": 0.9812247215782185,
+      "candidate": 0.9819332403664544,
+      "delta": 0.0007085187882358568,
+      "status": "ACCEPTER"
+    },
+    "recall": {
+      "baseline": 0.8191489361702128,
+      "candidate": 0.8085106382978723,
+      "delta": -0.010638297872340496,
+      "status": "ACCEPTER"
+    },
+    "precision": {
+      "baseline": 0.875,
+      "candidate": 0.8837209302325582,
+      "delta": 0.008720930232558155,
+      "status": "ACCEPTER"
+    }
+  }
+}

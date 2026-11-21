@@ -1,0 +1,25 @@
+# Données volumineuses (le jeu complet n'est pas versionné ; voir data/README.md)
+data/creditcard.csv
+data/*.zip
+
+# Modèles entraînés (régénérables, et un fichier joblib peut exécuter du code)
+models/
+
+# Secrets
+.env
+*.env
+kaggle.json
+credentials.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+coverage.xml
+htmlcov/
+.ipynb_checkpoints/
